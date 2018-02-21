@@ -12,6 +12,9 @@ import { RecepiesComponent } from './recepies/recepies.component';
 import { RecepieListComponent } from './recepies/recepie-list/recepie-list.component';
 import { RecepieDetailComponent } from './recepies/recepie-detail/recepie-detail.component';
 import { RecepieItemComponent } from './recepies/recepie-list/recepie-item/recepie-item.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { RecepieItemComponent } from './recepies/recepie-list/recepie-item/recep
     RecepieListComponent,
     RecepieDetailComponent,
     RecepieItemComponent,
+    ShoppingListComponent,
+    ShoppingEditComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
