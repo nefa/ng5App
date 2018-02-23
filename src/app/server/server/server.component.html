@@ -2,11 +2,11 @@
 <hr />
 <!-- <p class="server-name" [innerText]="serverName"></p> -->
 
-<div *ngIf="!!serverName; else noServer">New server crated: {{ serverName }}</div>
-  
+<div *ngIf="!!element.name; else noServer">New server crated: {{ element.name }}</div>
+
 <ng-template #noServer>
   <div class="alert alert-warning" role="alert">
     <p>Server created !</p>
-    <p>No params !</p>  
+    <p>No params !</p>
   </div>
 </ng-template>

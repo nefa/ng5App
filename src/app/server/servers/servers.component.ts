@@ -21,7 +21,12 @@ export class ServersComponent implements OnInit {
 
   addServer() {
     if (!!this.serverName.length) {
-      this.servers.push(this.serverName);
+      this.servers.push({
+        name: this.serverName,
+        content: '',
+        type: 'SERVER_ELEMENT'
+      });
+
       this.serverCreationStatus = 'Server created';
 
       setTimeout(() => {
