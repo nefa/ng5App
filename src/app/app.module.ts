@@ -15,6 +15,7 @@ import { RecepieItemComponent } from './recepies/recepie-list/recepie-item/recep
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HeaderComponent } from './header/header.component';
+import { ErrorAlertComponent } from './alerts/error-alert/error-alert.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { HeaderComponent } from './header/header.component';
     ShoppingListComponent,
     ShoppingEditComponent,
     HeaderComponent,
+    ErrorAlertComponent,
   ],
   imports: [
     BrowserModule,
