@@ -7,7 +7,7 @@
           [disabled]="(!allowNewServer || !serverName.length)"
           (click)="addServer()"> Add server </button>
 
-        <span class="label"
+        <span class="label" 
           [ngClass]="{
             'label-success':serverCreationStatus === 'Server created',
             'label-default':serverCreationStatus === 'No status'
@@ -26,7 +26,9 @@
 
         <app-server
           *ngFor="let serverEl of servers; let i=index"
-          [serverElement]="serverEl"></app-server>
+          [element]="serverEl"
+          
+          (deactivate)="updateServer($event)"></app-server>
 
         <!--<app-success-alert></app-success-alert>
         <app-warning-alert></app-warning-alert> -->

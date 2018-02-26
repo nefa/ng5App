@@ -2,7 +2,17 @@
 <hr />
 <!-- <p class="server-name" [innerText]="serverName"></p> -->
 
-<div *ngIf="!!element.name; else noServer">New server crated: {{ element.name }}</div>
+<div *ngIf="!!element.name; else noServer">
+  <p>New server crated: {{ element.name }}</p>
+
+  <span class="label"
+    [ngClass]="{
+      'label-danger': element.active,
+      'laberl-default': !element.active
+    }"
+    (click)="stop()">stop</span>
+
+</div>
 
 <ng-template #noServer>
   <div class="alert alert-warning" role="alert">
