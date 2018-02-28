@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 
 export interface IserverElement {
   id: number;
@@ -24,6 +24,11 @@ export class ServerComponent implements OnInit {
   test: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes', changes);
+    
+  }
 
   ngOnInit() {}
 

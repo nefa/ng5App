@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+//services
+import {ServersServiceService} from './services/servers-service.service';
+
 
 import { AppComponent } from './app.component';
 import { ServerComponent } from './server/server/server.component';
@@ -32,13 +35,10 @@ import { ErrorAlertComponent } from './alerts/error-alert/error-alert.component'
     ShoppingListComponent,
     ShoppingEditComponent,
     HeaderComponent,
-    ErrorAlertComponent,
+    ErrorAlertComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule
-  ],
-  providers: [],
+  imports: [BrowserModule, FormsModule],
+  providers: [ServersServiceService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

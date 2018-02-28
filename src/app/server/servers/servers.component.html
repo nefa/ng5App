@@ -16,8 +16,13 @@
       <!-- <input type="text" class="form-control"
         (input)="onChangeServerName($event)"> -->
 
-        <input type="text" class="form-control"
-          [(ngModel)]="serverName">
+        <!-- <input type="text" class="form-control"
+          [(ngModel)]="serverName"> -->
+
+        <!-- <input type="text" class="form-control" #serverO>
+        <button (click)="updateValue(serverO)">check node</button> -->
+          <input type="text" class="form-control" #refServerName>
+          <button (click)="updateRef(refServerName)">check ref</button> -->
 
         <button class="btn btn-standard"
           [ngStyle]="{'float':'right'}"
