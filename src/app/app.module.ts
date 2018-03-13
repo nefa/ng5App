@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //services
 import {ServersServiceService} from './services/servers-service.service';
@@ -39,7 +39,7 @@ import { ReactctiveSimpleFormComponent } from './forms/reactctive-simple-form/re
     ErrorAlertComponent,
     ReactctiveSimpleFormComponent
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule ],
   providers: [ServersServiceService],
   bootstrap: [AppComponent]
 })
