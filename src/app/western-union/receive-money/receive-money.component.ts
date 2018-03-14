@@ -1,26 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+/** */
+import { WesternUnionService } from '../../services/western-union.service';
+
 
 
 interface IformBasic { // later build a class and extend it
   onSubmit(): void; // Promise<any> | Observable<any>
   onReset(): void;
-};
+}
 
 class FormBasic implements IformBasic {
   // @TODO
-  // DI post western/payments 
+  // DI post western/payments
   // DI on a subject that can emit, reset and submit
 
-  async onSubmit() {
+  async onSubmit() {}
 
-  };
-  onReset() { }; 
+  onReset() { }
 
 }
 
 export interface IWesternReceiveMoney {
-  checkMtcn(control: FormControl): { [key: string]: boolean } | null; //validator function
+  /**Validator functions */
+  checkMtcn(control: FormControl): { [key: string]: boolean } | null;
   checkAmount(): void;
   checkCurrency(): void;
 }
@@ -28,31 +31,41 @@ export interface IWesternReceiveMoney {
 @Component({
   selector: 'app-receive-money',
   templateUrl: './receive-money.component.html',
-  styleUrls: ['./receive-money.component.css']
+  styleUrls: ['./receive-money.component.css'],
+  providers: [WesternUnionService]
 })
 export class ReceiveMoneyComponent extends FormBasic implements OnInit, OnDestroy, IWesternReceiveMoney {
 
-  WS_RECEIVE_POST_EP_SEGMENT = '/we-some-endpoint-segment'
+  WS_RECEIVE_POST_EP_SEGMENT = '/we-some-endpoint-segment';
 
   westernReceive: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private ws: WesternUnionService) {
     super();
-   }
+  }
 
   ngOnInit() {
+    this.getPrerequisites();
+
     this.westernReceive = this.formBuilder.group({
       mtcn: ['', [Validators.required, this.checkMtcn.bind(this)]]
     });
   }
-  
+
   ngOnDestroy() {}
 
-  async onSubmit() {
+  async onSubmit() {}
+  onReset() {}
 
-  };
+  async getPrerequisites() {
+    try {
+      const data = await this.ws.getWesternPrerequisites();
+      console.log(data)
 
-  onReset() {}; 
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   checkMtcn(control: FormControl): { [key: string]: boolean } | null {
     const _only_digits = '^[0-9]{1,10}$', //only digits, fix 10 length. use in Validators.pattern
@@ -72,8 +85,8 @@ export class ReceiveMoneyComponent extends FormBasic implements OnInit, OnDestro
     return null;
   }
 
-  checkAmount():void {};
-  checkCurrency():void {};
+  checkAmount(): void {}
+  checkCurrency(): void {}
 
 
 }

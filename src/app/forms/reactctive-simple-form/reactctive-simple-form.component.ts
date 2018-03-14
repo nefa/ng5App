@@ -31,10 +31,8 @@ export class ReactctiveSimpleFormComponent implements OnInit {
 
     // this.user.statusChanges.subscribe(
     //   (status) => console.log(status);
-      
-    // );
+        // );
 
-    
   }
 
   get options(): FormArray {

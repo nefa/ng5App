@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //services
 import {ServersServiceService} from './services/servers-service.service';
+import { WesternUnionService } from './services/western-union.service';
 
 
 import { AppComponent } from './app.component';
@@ -42,7 +43,7 @@ import { ReceiveMoneyComponent } from './western-union/receive-money/receive-mon
     ReceiveMoneyComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule ],
-  providers: [ServersServiceService],
+  providers: [ServersServiceService, WesternUnionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
