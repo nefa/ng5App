@@ -20,6 +20,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { HeaderComponent } from './header/header.component';
 import { ErrorAlertComponent } from './alerts/error-alert/error-alert.component';
 import { ReactctiveSimpleFormComponent } from './forms/reactctive-simple-form/reactctive-simple-form.component';
+import { ReceiveMoneyComponent } from './western-union/receive-money/receive-money.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ReactctiveSimpleFormComponent } from './forms/reactctive-simple-form/re
     ShoppingEditComponent,
     HeaderComponent,
     ErrorAlertComponent,
-    ReactctiveSimpleFormComponent
+    ReactctiveSimpleFormComponent,
+    ReceiveMoneyComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule ],
   providers: [ServersServiceService],

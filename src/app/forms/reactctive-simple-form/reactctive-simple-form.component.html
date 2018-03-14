@@ -1,3 +1,4 @@
+
 <form novalidate (ngSubmit)="onSubmit(user)" [formGroup]="user">
   <label>
     <span>Full name</span>
@@ -32,10 +33,20 @@
       Confirming email is required
     </div>
   </div>
-  <label >
-    <span>Mtcn</span>
-    <input type="text" placeholder="input given code" formControlName="mtcn">
-  </label>
+
+  <div class="options" formArrayName="options">
+    <li *ngFor="let optionCtrl of user.get('options').controls; let i = index"
+       [formGroupName]="i">
+       input option name: <input type="text" formControlName="title"> ||| 
+       amount: <input type="number" formControlName="amount">
+       <span class="clear" (click)="clearOption(i)">[x]</span>
+      
+    </li>
+    <hr>
+    <button (click)="addOption()">Add option</button>
+
+  </div>
+
   <br>
   <button type="submit" [disabled]="user.invalid" >Sign up</button>
  

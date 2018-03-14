@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 import { User } from '../../western-union/western-union-model';
 import { Observable } from 'rxjs/Observable';
@@ -22,7 +22,7 @@ export class ReactctiveSimpleFormComponent implements OnInit {
         email: ['', [Validators.required], this.checkEmails.bind(this)],
         confirm: ['', Validators.required]
       }),
-      mtcn: ['', [Validators.pattern('[0-9]{10}'), this.checkMtcn.bind(this)]]
+      options: this.formBuilder.array([])
     });
 
     // this.user.valueChanges.subscribe(
@@ -33,23 +33,30 @@ export class ReactctiveSimpleFormComponent implements OnInit {
     //   (status) => console.log(status);
       
     // );
+
+    
+  }
+
+  get options(): FormArray {
+    return (<FormArray>this.user.get('options'));
+  }
+
+  clearOption(index) {
+    this.options.removeAt(index);
+  }
+
+  addOption(title, amount) {
+    this.options.push(
+      this.formBuilder.group({
+        'title': [title || ''],
+        'amount': [amount || '']
+      })
+    )
   }
 
   onSubmit(usr) {
     console.log(this.user);
     this.user.reset();
-  }
-
-  checkMtcn(control: FormControl): { [key: string]: boolean } | null {
-    const _regexp = new RegExp('^[0-9]{1,10}$');
-    if(_regexp.test(control.value)) {
-      console.log(control.value);
-      this.user.patchValue({
-        'mtcn': control.value.slice(0, -1)
-      });
-      return {mtcnForbidden: true};
-    }
-    return null;
   }
 
   chekcForbiddenNames(control: FormControl): {[key: string]: boolean} | null {

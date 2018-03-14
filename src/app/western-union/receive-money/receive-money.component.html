@@ -1,0 +1,14 @@
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="westernReceive">
+
+  <!-- dropdown select component -->
+
+  <!-- amount /currency -->
+  <div class="inputText simple">
+    <label>
+      <span [innerHtml]="'western__labels__mtcn'"></span>
+      <input type="text" placeholder="'western__labels__mtcn_placeholder'" formControlName="mtcn">
+    </label>
+  </div>
+  <br>
+  <button type="submit" [disabled]="westernReceive.invalid">Sign up</button>
+</form>
