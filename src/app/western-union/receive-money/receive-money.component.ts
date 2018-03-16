@@ -2,10 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 /** */
 import { WesternUnionService } from '../../services/western-union.service';
+import { FormBasicService } from '../../services/form-basic.service';
+
 
 
 
 interface IformBasic { // later build a class and extend it
+  syncSummary(): void;
   onSubmit(): void; // Promise<any> | Observable<any>
   onReset(): void;
 }
@@ -14,6 +17,10 @@ class FormBasic implements IformBasic {
   // @TODO
   // DI post western/payments
   // DI on a subject that can emit, reset and submit
+
+  constructor() {}
+
+  syncSummary() {}
 
   async onSubmit() {}
 
@@ -32,7 +39,7 @@ export interface IWesternReceiveMoney {
   selector: 'app-receive-money',
   templateUrl: './receive-money.component.html',
   styleUrls: ['./receive-money.component.css'],
-  providers: [WesternUnionService]
+  providers: [WesternUnionService, FormBasicService]
 })
 export class ReceiveMoneyComponent extends FormBasic implements OnInit, OnDestroy, IWesternReceiveMoney {
 
@@ -40,12 +47,15 @@ export class ReceiveMoneyComponent extends FormBasic implements OnInit, OnDestro
 
   westernReceive: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private ws: WesternUnionService) {
+  constructor(private formBuilder: FormBuilder, private wu: WesternUnionService, private fbs: FormBasicService) {
     super();
   }
 
   ngOnInit() {
     this.getPrerequisites();
+    this.fbs.reset$.subscribe(reset => {
+      console.log(reset);
+    });
 
     this.westernReceive = this.formBuilder.group({
       mtcn: ['', [Validators.required, this.checkMtcn.bind(this)]]
@@ -55,12 +65,13 @@ export class ReceiveMoneyComponent extends FormBasic implements OnInit, OnDestro
   ngOnDestroy() {}
 
   async onSubmit() {}
+
   onReset() {}
 
   async getPrerequisites() {
     try {
-      const data = await this.ws.getWesternPrerequisites();
-      console.log(data)
+      const data = await this.wu.getWesternPrerequisites();
+      console.log(data);
 
     } catch (err) {
       console.error(err);
