@@ -1,14 +1,56 @@
-<form novalidate (ngSubmit)="onSubmit()" [formGroup]="westernReceive">
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="westernReceive" class="form-inline">
+
+  <button type="button" class="btn button-primary btn-xs text-right" (click)="onReset()">reset</button>
 
   <!-- dropdown select component -->
 
   <!-- amount /currency -->
-  <div class="inputText simple">
-    <label>
-      <span [innerHtml]="'western__labels__mtcn'"></span>
-      <input type="text" placeholder="'western__labels__mtcn_placeholder'" formControlName="mtcn">
-    </label>
+
+  <div class="form-group inputText short" formGroupName="amountCurrency">
+    <div class="amount" >
+
+      <label for="amount"><span>amount label</span></label>
+      <input type="text" 
+        (paste)="$event.preventDefault()"
+        (input)="valuechange($event)"
+        formControlName="amount"
+        OnlyDigits="true">
+        <!-- [textMask]="{mask: amountMask}" -->
+        <div class="alert alert-danger" role="alert" 
+          *ngIf="amount.hasError('required') && amount.touched">
+          amount is required
+        </div>
+    </div>
   </div>
+
+  <div class="form-group inputText ">
+    <label for="mtcn"><span [innerHtml]="'western__labels__mtcn'"></span></label>
+      <input type="text" placeholder="'western__labels__mtcn_placeholder'"
+        (paste)="$event.preventDefault()"
+        formControlName="mtcn"
+        OnlyDigits="true">
+  </div>
+
   <br>
-  <button type="submit" [disabled]="westernReceive.invalid">Sign up</button>
+  <button type="submit" class="btn btn-default"
+    [disabled]="westernReceive.invalid">Next</button>
+
+   <app-step2-info [extended]="false" [data]="this.westernReceive"></app-step2-info>
+
 </form>
+
+<!-- <basic-form [formName] = "westernReceive" (submit)="onSubmit($evt)">
+    <div class="form-group inputText simple">
+      <label for="mtcn">
+        <span [innerHtml]="'western__labels__mtcn'"></span>
+      </label>
+      <input type="text" placeholder="'western__labels__mtcn_placeholder'" formControlName="mtcn">
+    </div>
+
+    <info-component [visibility]="!extended" [data]="westernReceive" (goBack)="extended = !extended"></info-component>
+
+    <step-3 [result]=""></step-3>
+
+    
+    <button type="submit" class="btn btn-default" [disabled]="westernReceive.invalid">Next</button>
+</basic-form> -->

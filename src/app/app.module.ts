@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+/** other vendors */
+import { TextMaskModule } from 'angular2-text-mask';
+
 //services
 import {ServersServiceService} from './services/servers-service.service';
 import { WesternUnionService } from './services/western-union.service';
@@ -23,6 +26,9 @@ import { HeaderComponent } from './header/header.component';
 import { ErrorAlertComponent } from './alerts/error-alert/error-alert.component';
 import { ReactctiveSimpleFormComponent } from './forms/reactctive-simple-form/reactctive-simple-form.component';
 import { ReceiveMoneyComponent } from './western-union/receive-money/receive-money.component';
+import { FormBasicComponent } from './forms/form-basic/form-basic.component';
+import { Step2InfoComponent } from './forms/form-basic/step2-info/step2-info.component';
+import { OnlyDigitsDirective } from './directives/only-digits.directive';
 
 
 @NgModule({
@@ -41,10 +47,13 @@ import { ReceiveMoneyComponent } from './western-union/receive-money/receive-mon
     HeaderComponent,
     ErrorAlertComponent,
     ReactctiveSimpleFormComponent,
-    ReceiveMoneyComponent
+    ReceiveMoneyComponent,
+    FormBasicComponent,
+    Step2InfoComponent,
+    OnlyDigitsDirective,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule ],
   providers: [ServersServiceService, WesternUnionService, FormBasicService],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, TextMaskModule ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
