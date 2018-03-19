@@ -1,6 +1,37 @@
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="westernReceive" class="form-inline">
 
   <button type="button" class="btn button-primary btn-xs text-right" (click)="onReset()">reset</button>
+<!-- 
+  <div class="dropdown input-group" dropdown [dropdownToggle]="true" (onOpen)="onAccountOpen($event)" (onClose)="onAccountClose($event)">
+    <button type="text" class="form-control" placeholder="Username" dropdown-open>My Heroes</button>
+     
+    <ul class="dropdown-menu">
+      <li>
+        <a>Badman</a>
+      </li>
+      <li>
+        <a>Sadman</a>
+      </li>
+      <li>
+        <a>Lieman</a>
+      </li>
+    </ul>
+  </div> -->
+
+
+  <input-dropdown *ngIf="accounts.length" 
+    [list]="accounts" 
+    [config]="{template: 'account', placeholder: 'account placeholder'}" 
+    (itemSelected$)="onSelectAccount($event)">
+
+      <span class="main-item" main-item>
+        {{'test main item'}} {{item}}
+      </span>
+
+      <div class="list-item" list-item>
+        {{'test list item'}}
+      </div>
+  </input-dropdown>
 
   <!-- dropdown select component -->
 
@@ -12,7 +43,7 @@
       <label for="amount"><span>amount label</span></label>
       <input type="text" 
         (paste)="$event.preventDefault()"
-        (input)="valuechange($event)"
+        (input)="onAmountChange($event)"
         formControlName="amount"
         OnlyDigits="true">
         <!-- [textMask]="{mask: amountMask}" -->
@@ -27,6 +58,7 @@
     <label for="mtcn"><span [innerHtml]="'western__labels__mtcn'"></span></label>
       <input type="text" placeholder="'western__labels__mtcn_placeholder'"
         (paste)="$event.preventDefault()"
+        (input)="onMtcnChange($event)"
         formControlName="mtcn"
         OnlyDigits="true">
   </div>

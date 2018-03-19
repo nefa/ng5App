@@ -1,0 +1,35 @@
+<div class="dropdown input-group" dropdown [dropdownToggle]="true">
+  <button type="text" class="form-control" placeholder="config.placeholder" dropdown-open>
+      <span *ngIf="itemSelected">{{itemSelected.nickname}}</span>
+  </button>
+  
+  <ul class="dropdown-menu" *ngIf="list.length">
+    <span *ngFor="let item of list">
+      <li *ngIf="itemSelected && (item.nickname !== itemSelected.nickname)"
+         (click)="onSelectItem(item)">{{item.nickname}}
+      </li>
+      <li *ngIf="!itemSelected"  
+        (click)="onSelectItem(item)">{{item.nickname}}
+      </li>
+    </span>
+  </ul>
+  
+</div>
+
+<ng-template #defaultTpl> showing default item</ng-template>
+<ng-template #customTpl></ng-template>
+
+<!-- <ng-content *ngIf="itemSelected" select="[list-item]"></ng-content> -->
+
+<!-- <ng-template #accountTpl ngFor let-item [ngForOf]="list">
+  <li (click)="onSelectItem(item)">{{item.nickname}}</li>
+</ng-template> -->
+      
+
+<!-- <ul class="dropdown-menu" *ngIf="list.length">
+    <ng-template #accountTpl ngFor let-item [ngForOf]="list">
+      <li *ngIf="itemSelected && (item.nickname !== itemSelected.nickname)" (click)="onSelectItem(item)">
+        <span>{{item.nickname}}</span>
+      </li>
+    </ng-template>
+  </ul> -->

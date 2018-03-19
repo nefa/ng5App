@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 export interface IsummaryItem {
-  name: 'string';
-  label?: 'string' | null;
-  type: 'string';
+  name: string;
+  label?: string | null;
+  type: string;
   order: number;
   values?: string[];
   className?: string;
@@ -28,11 +28,11 @@ export class FormBasicComponent implements OnInit, IformBasic {
   ngOnInit() {
   }
 
-  addStepTwo(payload: IsummaryItem) {
+  syncInfo(payload: IsummaryItem) {
     this.summaryList[payload.order] = payload;
   }
 
-  removeStepTwo(name: string) {
+  unsyncInfo(name: string) {
     this.summaryList = this.summaryList.filter(item => name != item.name)
   }
 

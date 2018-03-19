@@ -8,14 +8,22 @@ import { WesternUnionService } from '../../services/western-union.service';
 import { FormBasicService } from '../../services/form-basic.service';
 
 /** models */
-import { FormBasicComponent } from '../../forms/form-basic/form-basic.component'
+import { FormBasicComponent, IsummaryItem } from '../../forms/form-basic/form-basic.component'
+
+interface Iaccount {
+  nickname: string;
+  iban: string;
+  typeId: number;
+  account: string;
+  balance: string;
+  currency: string;
+  status: string;
+}
 
 export interface IWesternReceiveMoney {
   // mtcnMask: string[];
   /**Validator functions */
   checkMtcn(control: FormControl): { [key: string]: boolean } | null;
-  checkAmount(): void;
-  checkCurrency(): void;
 }
 
 @Component({
@@ -29,6 +37,7 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
   WS_RECEIVE_POST_EP_SEGMENT = '/we-some-endpoint-segment';
 
   westernReceive: FormGroup;
+  accounts: Iaccount[] = [];
   // amountMask = ['$', ' ', /[1-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/];
 
   constructor(private formBuilder: FormBuilder, private wu: WesternUnionService, private fbs: FormBasicService) {
@@ -37,6 +46,7 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
 
   ngOnInit() {
     super.ngOnInit();
+
 
     this.getPrerequisites();
 
@@ -79,6 +89,9 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
     try {
       const data = await this.wu.getWesternPrerequisites();
       console.log(data);
+      this.accounts = data.accounts;
+      console.log(this.accounts);
+      
 
     } catch (err) {
       console.error(err);
@@ -103,10 +116,50 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
     return null;
   }
 
-  valuechange($event) {
-    // console.log($event);
-    console.log(this.amount)
+
+  onSelectAccount(account: Iaccount) {
+    console.log(account);
     
+  }
+
+  onAccountOpen($event) {
+
+  }
+
+  onAccountClose($event) {
+
+  }
+
+  onAmountChange($event: Event) {
+    if (this.amount.status === "VALID") {
+      const _info: IsummaryItem = {
+        name: 'amount',
+        label: 'Amount_label',
+        type: '?',
+        order: 3,
+        className: '-amount'
+      };
+      this.syncInfo(_info);
+    
+    } else {
+      this.unsyncInfo('amount');
+    }
+  }
+
+  onMtcnChange($event: Event) {
+    if (this.mtcn.status === "VALID") {
+      const _info: IsummaryItem = {
+        name: 'metcn',
+        label: 'Mtcn_label',
+        type: '?',
+        order: 4,
+        className: '-mtcn'
+      };
+      this.syncInfo(_info);
+
+    } else {
+      this.unsyncInfo('mtcn');
+    }
   }
 
   get amountCurrency(): FormArray {
@@ -116,15 +169,14 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
   get amount() {
     return this.amountCurrency.get('amount');
   }
+  
+  get mtcn() {
+    return this.westernReceive.get('mtcn');
+  }
 
   // disableEvent(evt) {
   //   let e = <KeyboardEvent>evt;
   //   e.preventDefault();
   //   console.log(e);
   // }
-
-  checkAmount(): void {}
-  checkCurrency(): void {}
-
-
 }

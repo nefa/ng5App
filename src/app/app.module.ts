@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** other vendors */
 import { TextMaskModule } from 'angular2-text-mask';
+import { DropdownModule } from "ngx-dropdown";
 
 //services
 import {ServersServiceService} from './services/servers-service.service';
@@ -29,6 +30,7 @@ import { ReceiveMoneyComponent } from './western-union/receive-money/receive-mon
 import { FormBasicComponent } from './forms/form-basic/form-basic.component';
 import { Step2InfoComponent } from './forms/form-basic/step2-info/step2-info.component';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
+import { InputDropdownComponent } from './shared/input-dropdown/input-dropdown.component';
 
 
 @NgModule({
@@ -51,9 +53,10 @@ import { OnlyDigitsDirective } from './directives/only-digits.directive';
     FormBasicComponent,
     Step2InfoComponent,
     OnlyDigitsDirective,
+    InputDropdownComponent,
   ],
   providers: [ServersServiceService, WesternUnionService, FormBasicService],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, TextMaskModule ],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, TextMaskModule, DropdownModule ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
