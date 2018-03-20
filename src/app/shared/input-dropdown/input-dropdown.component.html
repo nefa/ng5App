@@ -1,6 +1,43 @@
-<div class="dropdown input-group" dropdown [dropdownToggle]="true">
+<div class="row">
+  <!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group" >
+      <input type="text" class="form-control" 
+        (click)="toggleList()" value="{{itemSelected ? itemSelected.nickname : 'default value'}}"
+        (input)="onInputChange($event)">
+      <div class="input-group-btn" 
+        [ngClass]="{'open': isOpen}">
+        <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action
+          <span class="caret"></span>
+        </button> -->
+        <ul class="dropdown-menu pull-right" 
+          *ngIf="list.length">
+
+          <span *ngFor="let item of (list | filtermulti:[{nickname: currentValue}])">
+            <li *ngIf="itemSelected && (item.nickname !== itemSelected.nickname)" 
+              (click)="onSelectItem(item); toggleList()">{{item.nickname}}
+            </li>
+            <li *ngIf="!itemSelected" 
+              (click)="onSelectItem(item); toggleList()">{{item.nickname}}
+            </li>
+          </span>
+
+        </ul>
+      </div>
+      <!-- /btn-group -->
+    </div>
+    <!-- /input-group -->
+  </div>
+  <!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->  
+
+<!-- <div class="dropdown input-group" dropdown [dropdownToggle]="true">
   <button type="text" class="form-control" placeholder="config.placeholder" dropdown-open>
-      <span *ngIf="itemSelected">{{itemSelected.nickname}}</span>
+      <span *ngIf="itemSelected; then nick else defaultPlaceholder"></span>
+
+      <ng-template #nick>{{ itemSelected.nickname }}</ng-template>
+      <ng-template #defaultPlaceholder>{{ config.placeholder }}</ng-template>
   </button>
   
   <ul class="dropdown-menu" *ngIf="list.length">
@@ -14,10 +51,7 @@
     </span>
   </ul>
   
-</div>
-
-<ng-template #defaultTpl> showing default item</ng-template>
-<ng-template #customTpl></ng-template>
+</div> -->
 
 <!-- <ng-content *ngIf="itemSelected" select="[list-item]"></ng-content> -->
 

@@ -31,6 +31,7 @@ import { FormBasicComponent } from './forms/form-basic/form-basic.component';
 import { Step2InfoComponent } from './forms/form-basic/step2-info/step2-info.component';
 import { OnlyDigitsDirective } from './directives/only-digits.directive';
 import { InputDropdownComponent } from './shared/input-dropdown/input-dropdown.component';
+import { FiltermultiPipe } from './pipes/filtermulti.pipe';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { InputDropdownComponent } from './shared/input-dropdown/input-dropdown.c
     Step2InfoComponent,
     OnlyDigitsDirective,
     InputDropdownComponent,
+    FiltermultiPipe,
   ],
   providers: [ServersServiceService, WesternUnionService, FormBasicService],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, TextMaskModule, DropdownModule ],

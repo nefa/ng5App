@@ -1,37 +1,17 @@
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="westernReceive" class="form-inline">
 
   <button type="button" class="btn button-primary btn-xs text-right" (click)="onReset()">reset</button>
-<!-- 
-  <div class="dropdown input-group" dropdown [dropdownToggle]="true" (onOpen)="onAccountOpen($event)" (onClose)="onAccountClose($event)">
-    <button type="text" class="form-control" placeholder="Username" dropdown-open>My Heroes</button>
-     
-    <ul class="dropdown-menu">
-      <li>
-        <a>Badman</a>
-      </li>
-      <li>
-        <a>Sadman</a>
-      </li>
-      <li>
-        <a>Lieman</a>
-      </li>
-    </ul>
-  </div> -->
+  <br>
+  <hr>
 
-
-  <input-dropdown *ngIf="accounts.length" 
+  combobox:<input-dropdown *ngIf="accounts.length" 
     [list]="accounts" 
     [config]="{template: 'account', placeholder: 'account placeholder'}" 
     (itemSelected$)="onSelectAccount($event)">
 
-      <span class="main-item" main-item>
-        {{'test main item'}} {{item}}
-      </span>
-
-      <div class="list-item" list-item>
-        {{'test list item'}}
-      </div>
   </input-dropdown>
+  <br>
+  <hr>
 
   <!-- dropdown select component -->
 
@@ -53,6 +33,8 @@
         </div>
     </div>
   </div>
+  <br>
+  <hr>
 
   <div class="form-group inputText ">
     <label for="mtcn"><span [innerHtml]="'western__labels__mtcn'"></span></label>
