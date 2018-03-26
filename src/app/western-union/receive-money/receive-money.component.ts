@@ -88,10 +88,7 @@ export class ReceiveMoneyComponent extends FormBasicComponent implements OnInit,
   async getPrerequisites() {
     try {
       const data = await this.wu.getWesternPrerequisites();
-      console.log(data);
       this.accounts = data.accounts;
-      console.log(this.accounts);
-      
 
     } catch (err) {
       console.error(err);
